@@ -11,7 +11,3 @@ Clique em "Iniciar" para começar. Encontre os pares de cartas iguais no tabulei
 - HTML
 - CSS
 - JavaScript
-
-## Execução
-
-Abra o arquivo `index.html` em seu navegador para
