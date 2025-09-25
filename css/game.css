@@ -1,51 +1,70 @@
-.grid{
-    display: grid;
-    width: 100%;
-    max-width: 800px;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-    margin: 100px auto;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 20px 20px 50px;
 }
 
-
-/* dar uma melhorada */
-.card{
-    aspect-ratio: 3/4;
-    width: 100%; 
-    border-radius: 5px;
-    position: relative;
-    transition: all 400ms ease; 
-    transform-style: preserve-3d;
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 1em;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 970px;
+  padding: 30px;
+  margin-bottom: 30px;
 }
 
-
-.face{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-size: cover;
-    background-position: center;
-    border: 2px solid black;
-    transition: all 400ms ease;
+.grid {
+  display: grid;
+  width: 100%;
+  max-width: 970px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  margin: 0px auto;
 }
 
-.front{
-    transform: rotateY(180deg);
-
+.card {
+  aspect-ratio: 3/4;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  transition: all 400ms ease;
+  transform-style: preserve-3d;
 }
 
-.back{
-    background-image: url(../Memes/capa\ do\ jogo.png);
-    
-    backface-visibility: hidden;
+.face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
-.revel-card{
-    transform: rotateY(180deg);
-
+.front {
+  transform: rotateY(180deg);
 }
 
-/* DAR UMA MELHORADA */
-/* .card:hover {
-    transform: rotateY(180deg);
-} */
+.back {
+  background-image: url(../images/capa\ da\ carta.jpeg);
+  backface-visibility: hidden;
+}
+
+.revel-card {
+  transform: rotateY(180deg);
+}
+
+.disabled-card {
+  filter: saturate(0);
+  opacity: 0.5;
+}
