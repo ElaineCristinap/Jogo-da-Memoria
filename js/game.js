@@ -1,4 +1,5 @@
 const grid = document.querySelector(".grid");
+const errorSound = document.getElementById("error-sound");
 const spanPlayer = document.querySelector(".player");
 const timer = document.querySelector(".timer");
 
@@ -17,6 +18,21 @@ const characters = [
   "xuxa",
 ];
 
+const sounds = {
+  xuxa: "/sound/xuxa.mp3",
+  caetano: "/sound/caetano.mp3",
+  cafe: "/sound/quero-cafe.mp3",
+  danca: "/sound/meme-caixao.mp3",
+  diabo: "/sound/morre-diabo.mp3",
+  gato: "/sound/bari-papa.mp3",
+  morte: "/sound/amostradinho.mp3",
+  nazare: "/sound/risada-nazare.mp3",
+  sangue: "/sound/sangue-de-jesus.mp3",
+  senhora: "/sound/senhora.mp3",
+  vieira: "/sound/datena-cadeirada.mp3",
+  vizinho: "/sound/halloween.mp3",
+};
+
 const createElement = (tag, className) => {
   const element = document.createElement(tag);
   element.className = className;
@@ -25,21 +41,36 @@ const createElement = (tag, className) => {
 
 let firstCard = "";
 let secondCard = "";
+let currentTime = 0;
+let loop;
 
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll(".disabled-card");
 
   if (disabledCards.length === 24) {
     clearInterval(interval);
-    alert(
-      `Parabéns, ${spanPlayer.innerHTML}! Seu tempo foi: ${timer.innerHTML}`
-    );
-    resetGame();
+
+    const music = document.getElementById("bgMusic");
+    if (music) {
+      music.pause();
+      music.currentTime = 0;
+
+      const allCards = document.querySelectorAll(".card");
+      allCards.forEach((card) => card.classList.add("reveal-card"));
+
+      setTimeout(() => {
+        window.alert(
+          `🎉 Parabéns, ${spanPlayer.innerHTML} você venceu! ⏱ Tempo: ${timer.innerHTML}`
+        );
+        resetGame();
+      }, 500);
+    }
   }
 };
 
 const resetGame = () => {
   clearInterval(interval);
+
   totalSeconds = 0;
   timer.innerHTML = "00:00";
 
@@ -54,6 +85,12 @@ const checkCards = () => {
   const secondCharacter = secondCard.getAttribute("data-character");
 
   if (firstCharacter === secondCharacter) {
+    if (sounds[firstCharacter]) {
+      const audio = new Audio(sounds[firstCharacter]);
+      audio.volume = 0.7;
+      audio.play();
+    }
+
     firstCard.firstChild.classList.add("disabled-card");
     secondCard.firstChild.classList.add("disabled-card");
 
@@ -63,8 +100,11 @@ const checkCards = () => {
     checkEndGame();
   } else {
     setTimeout(() => {
-      firstCard.classList.remove("revel-card");
-      secondCard.classList.remove("revel-card");
+      errorSound.currentTime = 0;
+      errorSound.play();
+
+      firstCard.classList.remove("reveal-card");
+      secondCard.classList.remove("reveal-card");
 
       firstCard = "";
       secondCard = "";
@@ -73,15 +113,15 @@ const checkCards = () => {
 };
 
 const revealCard = ({ target }) => {
-  if (target.parentNode.className.includes("revel-card")) {
+  if (target.parentNode.className.includes("reveal-card")) {
     return;
   }
 
   if (firstCard === "") {
-    target.parentNode.classList.add("revel-card");
+    target.parentNode.classList.add("reveal-card");
     firstCard = target.parentNode;
   } else if (secondCard === "") {
-    target.parentNode.classList.add("revel-card");
+    target.parentNode.classList.add("reveal-card");
     secondCard = target.parentNode;
 
     checkCards();
@@ -138,3 +178,27 @@ window.onload = () => {
   startTimer();
   loadGame();
 };
+
+window.addEventListener("DOMContentLoaded", () => {
+  const music = document.getElementById("bgMusic");
+  const muteBtn = document.getElementById("muteBtn");
+  const muteIcon = document.getElementById("muteIcon");
+
+  let isMuted = true;
+  music.volume = 0.2;
+
+  muteBtn.addEventListener("click", () => {
+    if (isMuted) {
+      music.play(); 
+      music.volume = 0.2;
+      muteIcon.src = "/img/com-som.png";
+      muteIcon.alt = "Som ligado";
+      isMuted = false;
+    } else {
+      music.pause(); 
+      muteIcon.src = "/img/sem-som.png";
+      muteIcon.alt = "Som desligado";
+      isMuted = true;
+    }
+  });
+});

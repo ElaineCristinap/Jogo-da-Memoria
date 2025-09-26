@@ -19,8 +19,9 @@ header {
   border-radius: 5px;
   width: 100%;
   max-width: 970px;
-  padding: 30px;
-  margin-bottom: 30px;
+  padding: 15px 30px;
+  margin-bottom: 0 0 15px;
+  gap: 15px;
 }
 
 .grid {
@@ -60,11 +61,22 @@ header {
   backface-visibility: hidden;
 }
 
-.revel-card {
+.reveal-card {
   transform: rotateY(180deg);
 }
 
 .disabled-card {
   filter: saturate(0);
   opacity: 0.5;
+}
+
+#muteBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#muteBtn img {
+  width: 35px;
+  height: 35px;
 }
