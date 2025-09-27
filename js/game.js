@@ -48,7 +48,7 @@ const checkEndGame = () => {
   const disabledCards = document.querySelectorAll(".disabled-card");
 
   if (disabledCards.length === 24) {
-    clearInterval(loop);
+    clearInterval(interval);
 
     const music = document.getElementById("bgMusic");
     if (music) {
@@ -60,17 +60,17 @@ const checkEndGame = () => {
 
       setTimeout(() => {
         window.alert(
-          `🎉 Parabéns, ${spanPlayer.innerHTML} você venceu! ⏱ Tempo: ${currentTime} segundos`
+          `🎉 Parabéns, ${spanPlayer.innerHTML} você venceu! ⏱ Tempo: ${timer.innerHTML}`
         );
-      }, 300);
-
-      resetGame();
+        resetGame();
+      }, 500);
     }
   }
 };
 
 const resetGame = () => {
-  clearInterval(loop);
+  clearInterval(interval);
+
   totalSeconds = 0;
   timer.innerHTML = "00:00";
 
