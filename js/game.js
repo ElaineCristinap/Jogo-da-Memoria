@@ -19,18 +19,18 @@ const characters = [
 ];
 
 const sounds = {
-  xuxa: "/sound/xuxa.mp3",
-  caetano: "/sound/caetano.mp3",
-  cafe: "/sound/quero-cafe.mp3",
-  danca: "/sound/meme-caixao.mp3",
-  diabo: "/sound/morre-diabo.mp3",
-  gato: "/sound/bari-papa.mp3",
-  morte: "/sound/amostradinho.mp3",
-  nazare: "/sound/risada-nazare.mp3",
-  sangue: "/sound/sangue-de-jesus.mp3",
-  senhora: "/sound/senhora.mp3",
-  vieira: "/sound/datena-cadeirada.mp3",
-  vizinho: "/sound/halloween.mp3",
+  xuxa: "sound/xuxa.mp3",
+  caetano: "sound/caetano.mp3",
+  cafe: "sound/quero-cafe.mp3",
+  danca: "sound/meme-caixao.mp3",
+  diabo: "sound/morre-diabo.mp3",
+  gato: "sound/bari-papa.mp3",
+  morte: "sound/amostradinho.mp3",
+  nazare: "sound/risada-nazare.mp3",
+  sangue: "sound/sangue-de-jesus.mp3",
+  senhora: "sound/senhora.mp3",
+  vieira: "sound/datena-cadeirada.mp3",
+  vizinho: "sound/halloween.mp3",
 };
 
 const createElement = (tag, className) => {
@@ -47,7 +47,7 @@ let loop;
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll(".disabled-card");
 
-  if (disabledCards.length === 24) {
+  if (disabledCards.length === characters.length * 2) {
     clearInterval(interval);
 
     const music = document.getElementById("bgMusic");
@@ -133,7 +133,7 @@ const createCard = (character) => {
   const front = createElement("div", "face front");
   const back = createElement("div", "face back");
 
-  front.style.backgroundImage = `url(../images/${character}.jpeg)`;
+  front.style.backgroundImage = `url(images/${character}.jpeg)`;
 
   card.appendChild(front);
   card.appendChild(back);
@@ -191,12 +191,12 @@ window.addEventListener("DOMContentLoaded", () => {
     if (isMuted) {
       music.play(); 
       music.volume = 0.2;
-      muteIcon.src = "/img/com-som.png";
+      muteIcon.src = "images/com-som.png";
       muteIcon.alt = "Som ligado";
       isMuted = false;
     } else {
       music.pause(); 
-      muteIcon.src = "/img/sem-som.png";
+      muteIcon.src = "images/sem-som.png";
       muteIcon.alt = "Som desligado";
       isMuted = true;
     }
