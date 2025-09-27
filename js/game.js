@@ -189,13 +189,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   muteBtn.addEventListener("click", () => {
     if (isMuted) {
-      music.play(); 
+      music.play();
       music.volume = 0.2;
       muteIcon.src = "images/com-som.png";
       muteIcon.alt = "Som ligado";
       isMuted = false;
     } else {
-      music.pause(); 
+      music.pause();
       muteIcon.src = "images/sem-som.png";
       muteIcon.alt = "Som desligado";
       isMuted = true;
